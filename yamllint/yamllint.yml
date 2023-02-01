@@ -1,0 +1,49 @@
+# -*- yaml -*-
+#
+# yamllint config file for engineering/devops/ansible/yamllint
+#
+---
+extends: default
+
+yaml-files:
+  - '*.yaml'
+  - '*.yaml.j2'
+  - '*.yml'
+  - '*.yml.j2'
+  - '.yamllint'
+
+ignore: |
+  *vault*.yaml
+  *vault*.yml
+
+rules:
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+  brackets:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+  commas:
+    max-spaces-before: 0
+    max-spaces-after: 1
+  comments:
+    require-starting-space: true
+    min-spaces-from-content: 1
+  comments-indentation: disable
+  empty-lines:
+    max: 1
+    max-start: 0
+    max-end: 0
+  hyphens:
+    max-spaces-after: 1
+  indentation:
+    spaces: 2
+    indent-sequences: consistent
+    check-multi-line-strings: true
+  line-length:
+    max: 160
+    level: warning
+  new-lines:
+    type: unix
+  new-line-at-end-of-file: enable
+...

@@ -1,0 +1,11 @@
+# -*- yaml -*-
+#
+# ansible-lint config for engineering/devops/ansible
+#
+---
+skip_list:
+  - role-name   # to allow dashes in role names
+  - var-spacing # to allow {{var}} instead of {{ var }}
+use_default_rules: true
+verbosity: 1
+...
