@@ -1,6 +1,5 @@
 # -*- Makefile -*-
 #
-# Makefile for engineering/devops/ansible/ansible-lint
 #
 .DEFAULT_GOAL := help
 CONFIG_DIR := $(HOME)/.config

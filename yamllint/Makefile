@@ -1,6 +1,5 @@
 # -*- Makefile -*-
 #
-# Makefile for engineering/devops/ansible/yamllint
 #
 .DEFAULT_GOAL := help
 YAMLLINT_DIR := $(HOME)/.config/yamllint

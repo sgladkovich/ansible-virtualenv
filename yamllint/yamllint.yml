@@ -1,6 +1,5 @@
 # -*- yaml -*-
 #
-# yamllint config file for engineering/devops/ansible/yamllint
 #
 ---
 extends: default

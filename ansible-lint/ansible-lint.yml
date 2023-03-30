@@ -1,6 +1,5 @@
 # -*- yaml -*-
 #
-# ansible-lint config for engineering/devops/ansible
 #
 ---
 skip_list:

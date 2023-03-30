@@ -1,6 +1,5 @@
 # -*- Makefile -*-
 #
-# Makefile for engineering/devops/ansible
 #
 .DEFAULT_GOAL := help
 

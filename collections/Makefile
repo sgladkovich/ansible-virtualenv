@@ -1,6 +1,5 @@
 # -*- Makefile -*-
 #
-# Makefile for engineering/devops/ansible/collections
 #
 .DEFAULT_GOAL := help
 # Set these here in case they are not inherited from parent Makefile

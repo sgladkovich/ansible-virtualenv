@@ -1,6 +1,5 @@
 # -*- Makefile -*-
 #
-# Makefile for engineering/devops/ansible/roles
 #
 # This Makefile facilites finishing up the development of Ansible
 # roles.  It should be placed in the 'roles' directory, where each
