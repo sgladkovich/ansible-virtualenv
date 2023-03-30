@@ -83,9 +83,9 @@ collections_path = ~/.ansible/collections-5.9.0
 4. Create requirements file for Ansible collections named
    `collections/requirements-collections-<version>.yml` by copying
    an existing requirements file and changing all references to
-   Ansible version with `version`
+   Ansible version with `<version>`
 5. Create Ansible config file `ansible-<version>.cfg` by copying an
-   existing file and updating all references to Ansible version to `version`
+   existing file and updating all references to Ansible version to `<version>`
 6. Run `make all`
 
 ## Components
