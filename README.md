@@ -63,8 +63,8 @@ Switching to a particular Ansible version is done in 2 steps:
    within your shell
 2. Make sure `~/.asnible.cfg` points to the correct version of config
    file inside the cloned directory by removing `~/.ansible.cfg`
-   (after making sure it is indeed a symlink) and running `ln -s <repo
-   dir>/ansible-<version>.cfg ~/.ansible.cfg`
+   (after making sure it is indeed a symlink) and running `ln -s
+   <repository clone dir>/ansible-<version>.cfg ~/.ansible.cfg`
 
 Step 2 is particularly important as each config file has a
 version-specific `collections_path`, e.g.
