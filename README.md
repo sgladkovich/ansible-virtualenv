@@ -62,7 +62,9 @@ Switching to a particular Ansible version is done in 2 steps:
 1. Source `~/.local/virtualenv/ansible-<version>/bin/activate` from
    within your shell
 2. Make sure `~/.asnible.cfg` points to the correct version of config
-   file inside the cloned directory
+   file inside the cloned directory by removing `~/.ansible.cfg`
+   (after making sure it is indeed a symlink) and running `ln -s <repo
+   dir>/ansible-<version>.cfg ~/.ansible.cfg`
 
 Step 2 is particularly important as each config file has a
 version-specific `collections_path`, e.g.
@@ -75,10 +77,16 @@ collections_path = ~/.ansible/collections-5.9.0
 
 1. Edit `Makefile` and set `ANSIBLE_VERSIONS`
 2. Edit `collections/Makefile` and set `ANSIBLE_VERSIONS`
-3. Create the requirements file named
+3. Create requirements file for Ansible named
    `requirements-ansible-<version>.txt` by copying an existing
    requirements file and changing `ansible==<version>` accordingly
-4. Run `make all`
+4. Create requirements file for Ansible collections named
+   `collections/requirements-collections-<version>.yml` by copying
+   an existing requirements file and changing all references to
+   Ansible version with `version`
+5. Create Ansible config file `ansible-<version>.cfg` by copying an
+   existing file and updating all references to Ansible version to `version`
+6. Run `make all`
 
 ## Components
 
