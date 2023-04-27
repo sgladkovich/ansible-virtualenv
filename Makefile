@@ -13,12 +13,12 @@ endif
 PIP    := pip3
 # IMPORTANT: When keeping multiple versions of Ansible the default
 # version must be listed last in ANSIBLE_VERSIONS below.
-ANSIBLE_VERSIONS := 7.4.0
+ANSIBLE_VERSIONS := 7.5.0
 # See the comment above - the last version listed in ANSIBLE_VERSIONS
 # is considered default.
 ANSIBLE_DEFAULT_VERSION := $(lastword $(ANSIBLE_VERSIONS))
 ANSIBLE_CONFIG          := $(HOME)/.ansible.cfg
-VENV_BASE               := $(HOME)/.local/virtualenv
+VENV_BASE               := $(HOME)/.local/venv
 ANSIBLE_HOME            := $(HOME)/.ansible
 VENV_LIST               := $(foreach ver,$(ANSIBLE_VERSIONS),$(VENV_BASE)/ansible-$(ver))
 DIR_LIST                := $(ANSIBLE_HOME) $(ANSIBLE_HOME)/log $(VENV_BASE)
