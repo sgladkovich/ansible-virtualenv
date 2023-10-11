@@ -13,7 +13,7 @@ endif
 PIP    := pip3
 # IMPORTANT: When keeping multiple versions of Ansible the default
 # version must be listed last in ANSIBLE_VERSIONS below.
-ANSIBLE_VERSIONS := 7.6.0 8.4.0
+ANSIBLE_VERSIONS := 8.5.0
 # See the comment above - the last version listed in ANSIBLE_VERSIONS
 # is considered default.
 ANSIBLE_DEFAULT_VERSION := $(lastword $(ANSIBLE_VERSIONS))
