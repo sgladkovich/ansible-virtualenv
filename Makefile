@@ -5,7 +5,7 @@
 
 OSTYPE := $(shell uname -s)
 ifeq "$(OSTYPE)" "Darwin"
-PYTHON := python3.11
+PYTHON := python3.12
 else
 PYTHON := python3
 endif
