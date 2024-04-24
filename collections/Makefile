@@ -5,7 +5,7 @@
 # Set these here in case they are not inherited from parent Makefile
 # in engineering/devops/ansible
 ANSIBLE_HOME ?= $(HOME)/.ansible
-ANSIBLE_VERSIONS ?= 9.4.0
+ANSIBLE_VERSIONS ?= 9.5.1
 VENV_BASE ?= $(HOME)/.local/venv
 # These should remain local
 COLLECTIONS_DIR_LIST := $(foreach ver,$(ANSIBLE_VERSIONS),$(ANSIBLE_HOME)/collections-$(ver))
