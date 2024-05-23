@@ -1,0 +1,16 @@
+#
+# Ansible collections requirements for Ansible 9.6.0
+#
+---
+collections:
+  - name: amazon.aws
+  - name: ansible.netcommon
+  - name: ansible.posix
+  - name: ansible.utils
+  - name: community.aws
+  - name: community.crypto
+  - name: community.docker
+  - name: community.general
+  - name: community.grafana
+  - name: community.postgresql
+...
