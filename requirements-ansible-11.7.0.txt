@@ -3,7 +3,7 @@ PyYAML
 acme-tiny
 ansible-doctor
 ansible-lint
-ansible==11.17.0
+ansible==11.7.0
 boto
 boto3
 botocore
