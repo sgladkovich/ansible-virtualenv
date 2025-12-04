@@ -4,13 +4,9 @@
 .DEFAULT_GOAL := help
 
 OSTYPE := $(shell uname -s)
-ifeq "$(OSTYPE)" "Darwin"
-PYTHON := python3.13
-else
 PYTHON := python3
-endif
-
 PIP    := pip3
+
 # IMPORTANT: When keeping multiple versions of Ansible the default
 # version must be listed last in ANSIBLE_VERSIONS below.
 ANSIBLE_VERSIONS := 13.0.0
