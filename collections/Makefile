@@ -12,13 +12,16 @@ COLLECTIONS_DIR_LIST := $(foreach ver,$(ANSIBLE_VERSIONS),$(ANSIBLE_HOME)/collec
 REQUIREMENTS_FILES := $(wildcard requirements-collections-*.yml)
 RMFILES := *~ .*~ ./\#*\# ./.\#*\#
 
+define HELP_TEXT
+Available targets:
+
+  install   : install Ansible Collections to $(COLLECTIONS_DIR_LIST)
+  uninstall : uninstall Ansible Collections from $(COLLECTIONS_DIR_LIST)
+endef
+
 help:
-	@echo 'Available targets:'
-	@echo
-	@echo '  install : install Ansible Collections to'
-	@for dir in $(COLLECTIONS_DIR_LIST); do echo "    $${dir}"; done
-	@echo '  uninstall  : remove installed Ansible Collections from'
-	@for dir in $(COLLECTIONS_DIR_LIST); do echo "    $${dir}"; done
+	$(info $(HELP_TEXT))
+	@:
 
 install: directories $(COLLECTIONS_DIR_LIST)
 

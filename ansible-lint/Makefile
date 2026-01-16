@@ -7,10 +7,15 @@ CONFIG_FILE := $(CONFIG_DIR)/ansible-lint.yml
 DIR_LIST := $(CONFIG_DIR)
 RMFILES := *~ .*~ ./\#*\# ./.\#*\#
 
+define HELP_TEXT
+Available targets:
+
+  install : install ansible-lint config file $(CONFIG_FILE)
+endef
+
 help:
-	@echo 'Available targets:'
-	@echo
-	@echo '  install : install config file $(CONFIG_FILE)'
+	$(info $(HELP_TEXT))
+	@:
 
 install: $(CONFIG_FILE)
 

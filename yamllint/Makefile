@@ -6,10 +6,15 @@ YAMLLINT_DIR := $(HOME)/.config/yamllint
 YAMLLINT_CONFIG := $(YAMLLINT_DIR)/config
 RMFILES := *~ .*~ ./\#*\# ./.\#*\#
 
+define HELP_TEXT
+Available targets:
+
+  install : symlink config from $(YAMLLINT_CONFIG)
+endef
+
 help:
-	@echo 'Available targets:'
-	@echo
-	@echo '  install : symlink config from $(YAMLLINT_CONFIG)'
+	$(info $(HELP_TEXT))
+	@:
 
 install: $(YAMLLINT_DIR) $(YAMLLINT_CONFIG)
 

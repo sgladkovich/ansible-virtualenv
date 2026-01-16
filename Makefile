@@ -26,17 +26,21 @@ export \
 	ANSIBLE_VERSIONS \
 	VENV_BASE \
 
+define HELP_TEXT
+Available targets:
+
+  install          : install Ansible versions $(ANSIBLE_VERSIONS)'
+                     into virtual environments in $(VENV_BASE)'
+  collections      : install Ansible Collections'
+  yamllint         : install yamllint configuration'
+  ansible-lint     : install ansible-lint configuration'
+  all              : install everything'
+  uninstall        : uninstall Ansible versions $(ANSIBLE_VERSIONS)'
+endef
 
 help:
-	@echo 'Available targets:'
-	@echo
-	@echo '  install          : install Ansible versions $(ANSIBLE_VERSIONS)'
-	@echo '                     into virtual environments in $(VENV_BASE)'
-	@echo '  collections      : install Ansible Collections'
-	@echo '  yamllint         : install yamllint configuration'
-	@echo '  ansible-lint     : install ansible-lint configuration'
-	@echo '  all              : install everything'
-	@echo '  uninstall        : uninstall Ansible versions $(ANSIBLE_VERSIONS)'
+	$(info $(HELP_TEXT))
+	@:
 
 all: directories install collections symlinks yamllint ansible-lint
 

@@ -31,17 +31,22 @@ ROLES = $(shell find . -maxdepth 1 -type d)
 ROLE_HOSTS := all
 REMOVE := *~ .*~ ./\#*\# ./.\#*\#
 
+define HELP_TEXT
+Use role names (directories) as targets to:
+
+  - Run $(YAMLLINT) on *$(YAML_SUFFIX) files found in the role
+  - Run $(ANSIBLE_LINT) on the role itself
+  - Create role playbook in $(PLAYBOOKS_DIR)
+
+For example:
+
+  make gpu-info
+
+endef
+
 help:
-	@echo "Use role names (directories) as targets to"
-	@echo
-	@echo "  - Run $(YAMLLINT) on *$(YAML_SUFFIX) files found in the role"
-	@echo "  - Run $(ANSIBLE_LINT) on the role itself"
-	@echo "  - Create role playbook in $(PLAYBOOKS_DIR)"
-	@echo
-	@echo "For example:"
-	@echo
-	@echo "  make gpu-info"
-	@echo
+	$(info $(HELP_TEXT))
+	@:
 
 $(ROLES): FORCE
 	find $@ -type f -name '*$(YAML_SUFFIX)' | xargs yamllint
