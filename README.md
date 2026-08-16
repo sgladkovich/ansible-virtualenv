@@ -10,7 +10,7 @@ using different versions of Ansible and Ansible Collections.  Each
 Asnible version is installed into
 
 ```
-~/.local/virtualenv/ansible-<version>
+~/.local/venv/ansible-<version>
 ```
 
 and each version's Collections are installed into
