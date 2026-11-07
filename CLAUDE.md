@@ -13,7 +13,7 @@ produce the right virtualenvs, symlinks, and config files.
 ## Layout and how the pieces fit together
 
 - Top-level `Makefile` — creates a `virtualenv` per version in
-  `ANSIBLE_VERSIONS` under `$(VENV_BASE)` (`~/.local/venv/ansible-<version>`),
+  `ANSIBLE_VERSIONS` under `$(VENV_BASE)` (`~/.local/share/ansible-<version>`),
   installing from `requirements-ansible-<version>.txt` into each. Also
   symlinks `~/.ansible.cfg` to `ansible-<version>.cfg` for the *default*
   version, and creates `~/.ansible` + `~/.ansible/log`.
@@ -56,15 +56,21 @@ these four must be kept in lockstep for a given version:
 **`ANSIBLE_VERSIONS` order matters**: it's a space-separated list, and
 `ANSIBLE_DEFAULT_VERSION` is derived as `$(lastword $(ANSIBLE_VERSIONS))`.
 Whichever version is listed *last* becomes the default (`~/.ansible.cfg`
-symlink target). Currently only one version (`14.0.0`) is listed; historical
+symlink target). Currently only one version (`14.6.0`) is listed; historical
 `.cfg`/requirements files for older versions remain in the repo as an
 archive/reference even though they're no longer installed by default.
+
+The `~/.ansible.cfg` symlink is only created if nothing exists there yet
+(`test -e ... || ln -s ...`), so changing the default version does **not**
+repoint an existing symlink — that has to be done by hand (see "Switching
+between installed Ansible versions" below).
 
 ## Adding a new Ansible version
 
 1. Add the version to `ANSIBLE_VERSIONS` in the top-level `Makefile` (put it
-   last if it should become the new default).
-2. Add the same version to `ANSIBLE_VERSIONS` in `collections/Makefile`.
+   last if it should become the new default). In practice the old version is
+   usually *replaced* rather than appended, so only one version is installed.
+2. Make the same change to `ANSIBLE_VERSIONS` in `collections/Makefile`.
 3. Copy the most recent `requirements-ansible-<old>.txt` to
    `requirements-ansible-<new>.txt` and bump the `ansible==<version>` pin.
 4. Copy `collections/requirements-collections-<old>.yml` to
@@ -73,6 +79,8 @@ archive/reference even though they're no longer installed by default.
 5. Copy `ansible-<old>.cfg` to `ansible-<new>.cfg` and update
    `collections_path` to `~/.ansible/collections-<new-version>`.
 6. Run `make all` (see below).
+7. If `~/.ansible.cfg` already exists, repoint it at the new config:
+   `ln -sfn <repo>/ansible-<new>.cfg ~/.ansible.cfg`.
 
 ## Common commands
 
@@ -107,7 +115,7 @@ make <role-name>         # yamllint + ansible-lint the role, generate scaffold p
 
 ## Switching between installed Ansible versions (manual, two steps)
 
-1. `source ~/.local/venv/ansible-<version>/bin/activate`
+1. `source ~/.local/share/ansible-<version>/bin/activate`
 2. Point `~/.ansible.cfg` at the matching config: remove the existing symlink
    and run `ln -s <repo>/ansible-<version>.cfg ~/.ansible.cfg`. This step
    matters because each `.cfg` has a version-specific `collections_path`, and
@@ -116,6 +124,9 @@ make <role-name>         # yamllint + ansible-lint the role, generate scaffold p
 
 ## Notes
 
+- `PYTHON` in the top-level `Makefile` is pinned to `python3.14` because
+  ansible-core 2.21 fails to import on Python 3.15 (`dataclasses._is_type`
+  was removed). Revisit when bumping to an ansible-core that supports 3.15.
 - `ANSIBLE_CONFIG`/`ANSIBLE_HOME`/`VENV_BASE`/etc. are exported from the
   top-level `Makefile` so they're visible to sub-makes invoked via `$(MAKE)
   -C <dir>`, but each sub-Makefile also defines its own defaults (`?=`) so it

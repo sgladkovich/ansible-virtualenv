@@ -7,10 +7,10 @@ Ansible Collections, `ansible-lint` and `yamllint`.
 
 This project contains a set of Makefiles that allow installing and
 using different versions of Ansible and Ansible Collections.  Each
-Asnible version is installed into
+Ansible version is installed into
 
 ```
-~/.local/venv/ansible-<version>
+~/.local/share/ansible-<version>
 ```
 
 and each version's Collections are installed into
@@ -22,9 +22,9 @@ and each version's Collections are installed into
 In addition, the Makefiles in the below directories do the following:
 
 * `yamllint`: symlink the project's `yamllint` config file to
-  `~/.config/yamllint`
+  `~/.config/yamllint/config`
 * `ansible-lint`: symlink the project's `ansible-lint` config file to
-  `~/.ansible-lint`
+  `~/.config/ansible-lint.yml`
 * `roles`: provide a `Makefile` to facilitate linting of Yaml &
   Ansible code as well as creation of "scaffolding" playbooks
 
@@ -46,22 +46,26 @@ The versions of Ansible to be installed are determined by this
 ANSIBLE_VERSIONS
 ```
 
-The order of version numbers is imporatant: the one listed last is
+The order of version numbers is important: the one listed last is
 considered the "default".  This version is used to set the
-`~/.ansible.cfg` symlink; for example, Ansible 5.9.0 will be symlinked
+`~/.ansible.cfg` symlink; for example, Ansible 14.6.0 will be symlinked
 to
 
 ```
-<repository clone dir>/ansible-5.9.0.cfg
+<repository clone dir>/ansible-14.6.0.cfg
 ```
+
+Note that the symlink is only created if `~/.ansible.cfg` does not
+exist yet; an existing symlink is left alone and has to be updated
+manually (see below).
 
 ### Switch between installed Ansible versions
 
 Switching to a particular Ansible version is done in 2 steps:
 
-1. Source `~/.local/virtualenv/ansible-<version>/bin/activate` from
+1. Source `~/.local/share/ansible-<version>/bin/activate` from
    within your shell
-2. Make sure `~/.asnible.cfg` points to the correct version of config
+2. Make sure `~/.ansible.cfg` points to the correct version of config
    file inside the cloned directory by removing `~/.ansible.cfg`
    (after making sure it is indeed a symlink) and running `ln -s
    <repository clone dir>/ansible-<version>.cfg ~/.ansible.cfg`
@@ -70,7 +74,7 @@ Step 2 is particularly important as each config file has a
 version-specific `collections_path`, e.g.
 
 ```
-collections_path = ~/.ansible/collections-5.9.0
+collections_path = ~/.ansible/collections-14.6.0
 ```
 
 ### Add new version of Ansible
@@ -87,6 +91,8 @@ collections_path = ~/.ansible/collections-5.9.0
 5. Create Ansible config file `ansible-<version>.cfg` by copying an
    existing file and updating all references to Ansible version to `<version>`
 6. Run `make all`
+7. If `~/.ansible.cfg` already exists, repoint it to the new config
+   file: `ln -sfn <repository clone dir>/ansible-<version>.cfg ~/.ansible.cfg`
 
 ## Components
 
@@ -103,13 +109,13 @@ installing and removing Ansible Collections.  It supports 2 targets:
 
 The `Makefile` in the `ansible-lint` subdirectory supports 1 target:
 
-1. `make install` - symlink `ansible-lint` config file to `~/.ansible-lint.yml`
+1. `make install` - symlink `ansible-lint` config file to `~/.config/ansible-lint.yml`
 
 ### yamllint
 
 The `Makefile` in the `yamllint` subdirectory supports 1 target:
 
-1. `make install` - symlink `yamllint` config file to `~/.local/config/yamllint`
+1. `make install` - symlink `yamllint` config file to `~/.config/yamllint/config`
 
 ### roles
 
